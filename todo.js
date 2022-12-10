@@ -1,5 +1,5 @@
 
-console.log("Om Ganeshay namah:");
+// console.log("Om Ganeshay namah:");
 
 let form = document.getElementById('form');
 let textInput = document.getElementById('textInput');
@@ -24,6 +24,7 @@ form.addEventListener('submit', (e) => {
 
 // Get the data  show on screen
 let showTasks = () => {
+    // let task = JSON.parse(localStorage.getItem('tasks'));
 
     tasks.innerHTML = '';
     data.map((item, index) => {
@@ -63,11 +64,13 @@ let acceptData = () => {
         date: dateInput.value,
         description: textarea.value,
     });
+    // console.log(data);
     //set value in localstorage.
     localStorage.setItem('tasks', JSON.stringify(data));
+
     showTasks();
 
-    console.log(data);
+
 
 
 };
@@ -80,13 +83,14 @@ let formValidation = () => {
     else {
         //succes....;
         msg.innerHTML = '';
+        // console.log("data was saved");
         acceptData();
 
         //close the modal after submition
 
         add.setAttribute('data-bs-dismiss', 'modal');
         add.click();
-        // IIFE: Immediately Invoked function Expression
+        // // IIFE: Immediately Invoked function Expression
         (() => {
             add.setAttribute('data-bs-dismiss', '');
         })();
@@ -96,13 +100,13 @@ let formValidation = () => {
 //delete the task
 
 let deleteTask = (e) => {
-    console.log(e.parentElement.parentElement);
+    // console.log(e.parentElement.parentElement);
     //removing element from dom and removing from ui
     e.parentElement.parentElement.remove();
     //deleting the element from data array
     data.splice(e.parentElement.parentElement.id, 1);
-    localStorage.setItem('task', JSON.stringify(data));
-    console.log('data array after deletion', data);
+    localStorage.setItem('tasks', JSON.stringify(data));
+    // console.log('data array after deletion', data);
 };
 
 //Editing a task
@@ -117,7 +121,6 @@ let editTask = (e) => {
 
     deleteTask(e);
 };
-
 
 (() => {
     data = JSON.parse(localStorage.getItem('tasks'));
